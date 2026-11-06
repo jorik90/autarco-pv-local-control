@@ -1,0 +1,265 @@
+# Home Assistant configuratie voor Autarco / Solis omvormer (Modbus TCP op poort 502)
+# Voeg dit blok toe aan je configuration.yaml in Home Assistant.
+
+modbus:
+  - name: autarco_omvormer
+    type: tcp
+    host: 192.168.1.100 # Pas aan naar het IP-adres van jouw omvormer
+    port: 502
+    delay: 2
+    message_wait_milliseconds: 200
+    timeout: 5
+    sensors:
+      - name: "Autarco AC Vermogen"
+        unique_id: autarco_ac_power
+        slave: 1
+        address: 3004
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        scan_interval: 15
+
+      - name: "Autarco DC Vermogen"
+        unique_id: autarco_dc_power
+        slave: 1
+        address: 3006
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        scan_interval: 15
+
+      - name: "Autarco Opbrengst Totaal"
+        unique_id: autarco_total_energy
+        slave: 1
+        address: 3008
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 60
+
+      - name: "Autarco Opbrengst Deze Maand"
+        unique_id: autarco_energy_this_month
+        slave: 1
+        address: 3010
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 60
+
+      - name: "Autarco Opbrengst Vorige Maand"
+        unique_id: autarco_energy_last_month
+        slave: 1
+        address: 3012
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: "kWh"
+        device_class: energy
+        scan_interval: 300
+
+      - name: "Autarco Opbrengst Vandaag"
+        unique_id: autarco_energy_today
+        slave: 1
+        address: 3014
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 60
+
+      - name: "Autarco Opbrengst Gisteren"
+        unique_id: autarco_energy_yesterday
+        slave: 1
+        address: 3015
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kWh"
+        device_class: energy
+        scan_interval: 300
+
+      - name: "Autarco Opbrengst Dit Jaar"
+        unique_id: autarco_energy_this_year
+        slave: 1
+        address: 3016
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 300
+
+      - name: "Autarco PV1 Spanning"
+        unique_id: autarco_dc1_voltage
+        slave: 1
+        address: 3021
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "V"
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco PV1 Stroom"
+        unique_id: autarco_dc1_current
+        slave: 1
+        address: 3022
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "A"
+        device_class: current
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco PV2 Spanning"
+        unique_id: autarco_dc2_voltage
+        slave: 1
+        address: 3023
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "V"
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco PV2 Stroom"
+        unique_id: autarco_dc2_current
+        slave: 1
+        address: 3024
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "A"
+        device_class: current
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Fase L1 Spanning"
+        unique_id: autarco_ac_l1_voltage
+        slave: 1
+        address: 3033
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "V"
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Fase L2 Spanning"
+        unique_id: autarco_ac_l2_voltage
+        slave: 1
+        address: 3034
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "V"
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Fase L3 Spanning"
+        unique_id: autarco_ac_l3_voltage
+        slave: 1
+        address: 3035
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "V"
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Fase L1 Stroom"
+        unique_id: autarco_ac_l1_current
+        slave: 1
+        address: 3036
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "A"
+        device_class: current
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Fase L2 Stroom"
+        unique_id: autarco_ac_l2_current
+        slave: 1
+        address: 3037
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "A"
+        device_class: current
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Fase L3 Stroom"
+        unique_id: autarco_ac_l3_current
+        slave: 1
+        address: 3038
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "A"
+        device_class: current
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Temperatuur"
+        unique_id: autarco_temperature
+        slave: 1
+        address: 3041
+        input_type: input
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Netfrequentie"
+        unique_id: autarco_grid_frequency
+        slave: 1
+        address: 3042
+        input_type: input
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        unit_of_measurement: "Hz"
+        device_class: frequency
+        state_class: measurement
+        scan_interval: 30
+
+      - name: "Autarco Status Code"
+        unique_id: autarco_status_code
+        slave: 1
+        address: 3043
+        input_type: input
+        data_type: uint16
+        scan_interval: 30

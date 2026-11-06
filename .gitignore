@@ -1,0 +1,14 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Lokale meetbestanden / logs
+metingen.csv
+*.csv
+*.json
+
+# OS / Editor bestanden
+.DS_Store
+.vscode/
+.idea/
